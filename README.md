@@ -82,7 +82,6 @@ Streamlit 仪表盘在 `docker compose up -d` 后可访问 `http://localhost:850
 |------|--------|
 | `read_file` | 读取文件，支持 txt/json/csv/md，自动检测编码 |
 | `execute_sql` | 执行 SQL 查询（只允许 SELECT），防注入 |
-| `list_tables` | 查看数据库有哪些表 |
 | `web_search` | 用 DuckDuckGo 搜网页，免费不用 API Key |
 
 想加自己的工具？在 `agent-core/tools/` 目录下写个 Python 文件注册就行。

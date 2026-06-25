@@ -11,7 +11,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from agents.base import AgentConfig as AgentConfigDC, AgentStatus
+from agents.base import AgentConfig as AgentConfigDC
 from agents.llm_agent import LLMAgent
 from orchestration.workflow import WorkflowEngine, WorkflowStep
 from tools.registry import tool_registry
