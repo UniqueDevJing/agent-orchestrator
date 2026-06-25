@@ -12,43 +12,9 @@ GET /health
 ```json
 {
   "status": "ok",
-  "app": "AgentOrchestrator",
-  "version": "0.1.0",
-  "model": "gpt-4o",
-  "tools_count": 3
+  "agents": 2,
+  "tools": 5
 }
-```
-
----
-
-### 工具
-
-#### 列出所有工具
-
-```http
-GET /api/tools?category=database
-```
-
-响应:
-```json
-{
-  "tools": [
-    {
-      "name": "execute_sql",
-      "description": "执行只读SQL查询...",
-      "category": "database",
-      "parameters": [
-        {"name": "query", "type": "string", "description": "...", "required": true}
-      ]
-    }
-  ]
-}
-```
-
-#### 获取工具详情
-
-```http
-GET /api/tools/{tool_name}
 ```
 
 ---
@@ -58,7 +24,7 @@ GET /api/tools/{tool_name}
 #### 创建 Agent
 
 ```http
-POST /api/agents
+POST /agents
 Content-Type: application/json
 
 {
@@ -74,41 +40,44 @@ Content-Type: application/json
 #### 列出所有 Agent
 
 ```http
-GET /api/agents
-```
-
-#### 获取 Agent 详情 (含历史)
-
-```http
-GET /api/agents/{agent_name}
+GET /agents
 ```
 
 #### 执行 Agent 任务
 
 ```http
-POST /api/agents/{agent_name}/run
+POST /agents/{agent_name}/run
 Content-Type: application/json
 
 {
-  "agent_name": "data-analyst",
-  "task": "分析 sales 表的月度趋势并给出优化建议"
+  "task": "分析 sales 表的月度趋势并给出优化建议",
+  "context": {}
 }
 ```
 
-#### 删除 Agent
-
-```http
-DELETE /api/agents/{agent_name}
+响应:
+```json
+{
+  "agent": "data-analyst",
+  "status": "completed",
+  "response": "根据分析结果...",
+  "iterations": 3,
+  "events": [
+    {"type": "thinking", "content": "我需要先查看表结构..."},
+    {"type": "tool_call", "content": "调用 list_tables"},
+    {"type": "result", "content": "分析完成"}
+  ]
+}
 ```
 
 ---
 
 ### 工作流
 
-#### 执行多 Agent 工作流
+#### 顺序/并行工作流
 
 ```http
-POST /api/workflows
+POST /workflows
 Content-Type: application/json
 
 {
@@ -116,6 +85,26 @@ Content-Type: application/json
   "task": "分析项目代码质量并生成报告",
   "mode": "sequential"
 }
+```
+
+#### DAG 工作流
+
+```http
+POST /workflows/dag
+Content-Type: application/json
+
+[
+  {
+    "agent": "analyzer",
+    "step_name": "代码分析",
+    "depends_on": []
+  },
+  {
+    "agent": "validator",
+    "step_name": "结果校验",
+    "depends_on": ["代码分析"]
+  }
+]
 ```
 
 ---

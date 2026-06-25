@@ -64,7 +64,7 @@ Dashboard (Streamlit) → REST API → Python AgentCore
 ### 单 Agent 执行流程
 
 ```
-1. Client → POST /api/agents/{name}/run { task }
+1. Client → POST /agents/{name}/run { task }
 2. FastAPI → LLMAgent.run(task)
 3. Agent 构建 messages → 调用 LLM (OpenAI API)
 4. LLM 返回 function_call → Agent 解析工具名+参数
@@ -78,7 +78,7 @@ Dashboard (Streamlit) → REST API → Python AgentCore
 ### 多 Agent 工作流
 
 ```
-Client → POST /api/workflows { agents: [A,B,C], task, mode }
+Client → POST /workflows { agents: [A,B,C], task, mode }
 
 mode=sequential:
   A.run(task) → result_A

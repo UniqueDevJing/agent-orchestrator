@@ -59,10 +59,6 @@ class ToolRegistry:
         except ImportError:
             pass
         try:
-            from .sql_query import execute_sql as _es  # noqa: F811
-        except ImportError:
-            pass
-        try:
             from .web_search import web_search as _ws  # noqa: F811
         except ImportError:
             pass
