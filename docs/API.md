@@ -31,7 +31,7 @@ Content-Type: application/json
   "name": "data-analyst",
   "description": "数据分析专家",
   "system_prompt": "你是一个精通SQL和数据分析的AI助手...",
-  "tools": ["read_file", "execute_sql", "list_tables"],
+  "tools": ["read_file", "execute_sql", "web_search"],
   "max_iterations": 8,
   "temperature": 0.3
 }
@@ -63,8 +63,8 @@ Content-Type: application/json
   "response": "根据分析结果...",
   "iterations": 3,
   "events": [
-    {"type": "thinking", "content": "我需要先查看表结构..."},
-    {"type": "tool_call", "content": "调用 list_tables"},
+    {"type": "thinking", "content": "我需要先搜索相关信息..."},
+    {"type": "tool_call", "content": "调用 web_search"},
     {"type": "result", "content": "分析完成"}
   ]
 }
@@ -93,18 +93,21 @@ Content-Type: application/json
 POST /workflows/dag
 Content-Type: application/json
 
-[
-  {
-    "agent": "analyzer",
-    "step_name": "代码分析",
-    "depends_on": []
-  },
-  {
-    "agent": "validator",
-    "step_name": "结果校验",
-    "depends_on": ["代码分析"]
-  }
-]
+{
+  "task": "分析项目代码质量并生成报告",
+  "steps": [
+    {
+      "agent": "analyzer",
+      "step": "代码分析",
+      "depends": []
+    },
+    {
+      "agent": "validator",
+      "step": "结果校验",
+      "depends": ["代码分析"]
+    }
+  ]
+}
 ```
 
 ---

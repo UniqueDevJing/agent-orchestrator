@@ -39,9 +39,7 @@ with tab1:
                     st.success("执行完成")
                     st.markdown("### 响应")
                     st.write(data.get("response", ""))
-                    usage = data.get("usage", {})
-                    if usage:
-                        st.caption(f"Token: {usage.get('total_tokens', 0)}")
+                    st.caption(f"迭代次数: {data.get('iterations', 0)}")
                 else:
                     st.error(f"错误: {resp.text}")
         except Exception as e:
