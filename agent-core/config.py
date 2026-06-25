@@ -14,10 +14,6 @@ class Settings(BaseSettings):
     app_version: str = "0.4.0"
     debug: bool = False
 
-    # 数据库
-    database_url: str = "postgresql+asyncpg://ao_user:changeme@localhost:5432/agent_orchestrator"
-    redis_url: str = "redis://localhost:6379/0"
-
     # LLM
     openai_api_key: str = ""
     openai_base_url: str = "https://api.openai.com/v1"

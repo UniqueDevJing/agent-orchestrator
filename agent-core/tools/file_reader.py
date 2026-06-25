@@ -15,7 +15,7 @@ from tools.registry import ToolMetadata, ToolParameter, tool_registry
 ALLOWED_BASE = Path(os.environ.get("FILE_READER_BASE", "/app/workspace")).resolve()
 ALLOWED_EXTENSIONS = {
     ".txt", ".md", ".csv", ".json", ".yaml", ".yml",
-    ".py", ".java", ".html", ".css", ".js", ".xml", ".log",
+    ".py", ".html", ".css", ".js", ".xml", ".log",
     ".env", ".toml", ".cfg", ".ini",
 }
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
