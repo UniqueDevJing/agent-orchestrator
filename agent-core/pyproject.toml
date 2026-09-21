@@ -37,7 +37,7 @@ dependencies = [
 dev = ["pytest>=8.0.0", "pytest-asyncio>=0.23.0"]
 
 [project.urls]
-Repository = "https://github.com/JING04-PRODUCER/agent-orchestrator"
+Repository = "https://github.com/UniqueDevJing/agent-orchestrator"
 
 [build-system]
 requires = ["setuptools>=68"]

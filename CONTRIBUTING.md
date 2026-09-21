@@ -3,7 +3,7 @@
 ## Getting Started
 
 ```bash
-git clone https://github.com/JING04-PRODUCER/agent-orchestrator.git
+git clone https://github.com/UniqueDevJing/agent-orchestrator.git
 cd agent-orchestrator
 
 # Agent Core (Python)
